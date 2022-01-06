@@ -1,28 +1,48 @@
-// import React from "react";
-// import { Container, Typography, Grid } from "@material-ui/core";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
-// const Cart = () => {
-//     const isEmpty = true;
+export default function TemporaryDrawer() {
+  const [state, setState] = React.useState({
+    right: true,
+  });
 
-//     const EmptyCart = () => {
-//         <Typography variant="subtitle1">You have no items in your shopping cart, start adding some!</Typography>
-//     }
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
 
-//     const FilledCart = () => {
-//         <>
-//         <Grid container spacing={3}>
+    setState({ ...state, [anchor]: open });
+  };
 
-//         </Grid>
-//         </>
-//     }
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    ><h1>Shopping Cart</h1>
+    </Box>
+  );
 
-//     return (
-//         <Container>
-//             <div/>
-//             <Typography variant="h3">Your Shopping Cart</Typography>
-//             { isEmpty ? <EmptyCart /> : <FilledCart /> }
-//         </Container>
-//     )
-// }
-
-// export default Cart;
+  return (
+    <div>
+      {["Checkout"].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}

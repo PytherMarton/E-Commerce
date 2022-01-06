@@ -8,17 +8,14 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
-import { useState } from "react";
 
 import useStyles from "./styles";
 
 const Product = ({ product }) => {
   const classes = useStyles();
-  const [cart, setCart] = useState();
 
   const addCart = () => {
-    setCart(product)
-    console.log(cart);
+    
   };
 
   return (
