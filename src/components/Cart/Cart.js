@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 
+
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     right: true,
@@ -25,7 +26,10 @@ export default function TemporaryDrawer() {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-    ><h1>Shopping Cart</h1>
+    >
+      <h1>Shopping Cart</h1>
+      <p>Your cart is empty.</p>
+      
     </Box>
   );
 
